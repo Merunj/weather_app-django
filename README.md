@@ -19,18 +19,18 @@ WeatherApp - это погодное приложение, разработан�
 
 1. Клонируйте репозиторий на локальную машину:
     ```cmd
-    https://github.com/Merunj/weather_app-django.git
+    git clone https://github.com/Merunj/weather_app-django.git
     ```
 2. Перейдите в директорию проекта:
     ```cmd
-    cd WeatherApp
+    cd weather_app-django
     ```
 3. Создайте и активируйте виртуальное окружение:
     ```cmd
     python -m venv venv
     venv\Scripts\activate
     ```
-4. Установите зависимости:
+4. Установите зависимости, перейдя в каталог weather_project:
     ```cmd
     pip install -r requirements.txt
     ```

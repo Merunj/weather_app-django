@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="weather-card">
+    <div class="row justify-content-end">
+        <div class="col-auto">
+            <div class="sunny-icon">
+                <i class="bi bi-sun-fill"></i>
+            </div>
+        </div>
+    </div>
+    <h1 class="weather-title text-center mb-4">
+        Прогноз погоды</h1>    
+        <div class="container">
+            <form action="" method="POST" class="form-inline">
+                {% csrf_token %}
+                <div class="form-error">{{ form.non_field_errors }}</div>
+                {% for f in form %}
+                    <div class="input-group mb-3">
+                        <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>
+                        {{ f }}
+                        {% if forloop.last %}
+                            <div class="input-group-append">
+                                <button class="btn btn-primary weather-btn" type="submit" id="button-addon2">Получить погоду</button>
+                            </div>
+                        {% endif %}
+                        <div class="form-error">{{ f.errors }}</div>
+                    </div>
+                {% endfor %}
+            </form>
+        </div>
+{% if weather_data %}
+    {% if weather_data.error %}
+        <p>{{ weather_data.error }}</p>
+    {% else %}
+    <div id="weatherInfo">
+        <div class="weather-icon text-center">
+            <img id="image" src="https://yastatic.net/weather/i/icons/funky/dark/{{ weather_data.fact.icon }}.svg" alt="Weather icon" width="67" height="42">
+    </div>
+        <div class="weather-info text-center">
+            <p>{{ form.cleaned_data.city}}:</p>
+                {% if weather_data.fact.temp > 0 %}
+                    <p>Температура: +{{ weather_data.fact.temp }}</p>
+                {% else %}
+                    <p>Температура: -{{ weather_data.fact.temp }}</p>
+                {% endif %}    
+                <p>Ощущается как: {{ weather_data.fact.feels_like }}°C</lp>
+                <p>Скорость ветра: {{ weather_data.fact.wind_speed }} м/c</p>
+                <p>Давление: {{ weather_data.fact.pressure_mm }} мм. рт. ст</p>
+                <p>Влажность: {{ weather_data.fact.humidity }}%</p>
+        </div>
+    {% endif %}
+{% endif %}
+{% endblock %}

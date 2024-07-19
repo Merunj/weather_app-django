@@ -19,7 +19,7 @@ def index(request):
         form = WeatherForm(request.POST)
         if form.is_valid(): 
             city = form.cleaned_data['city']
-            access_key = 'bba32021-f783-413c-b9ee-cc8bbc5b04c5'
+            access_key = 'YOUR_API_TOKEN'
             headers = {'X-Yandex-Weather-Key': access_key}
             cooridinates = get_coordinates(city)
             if cooridinates:
